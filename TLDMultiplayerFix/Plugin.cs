@@ -1,5 +1,7 @@
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
+using HarmonyLib;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TLDMultiplayerFix
 {
@@ -14,9 +16,11 @@ namespace TLDMultiplayerFix
             configPhysicsUpdateRate = Config.Bind("Sync", "Physics.UpdateRate", 10f, "Physics update rate (Hz)");
         }
 
+        [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Called by BepInEx")]
         private void Awake()
         {
-
+            Harmony.CreateAndPatchAll(typeof(Plugin));
+            Logger.LogInfo($"Applied patches successfully!");
         }
     }
 }
