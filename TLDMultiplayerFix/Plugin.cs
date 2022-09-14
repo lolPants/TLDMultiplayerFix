@@ -1,4 +1,5 @@
-﻿using BepInEx;
+using BepInEx;
+using BepInEx.Configuration;
 
 namespace TLDMultiplayerFix
 {
@@ -6,6 +7,13 @@ namespace TLDMultiplayerFix
     [BepInProcess("TheLongDrive.exe")]
     public class Plugin : BaseUnityPlugin
     {
+        private ConfigEntry<float> configPhysicsUpdateRate;
+
+        public Plugin()
+        {
+            configPhysicsUpdateRate = Config.Bind("Sync", "Physics.UpdateRate", 10f, "Physics update rate (Hz)");
+        }
+
         private void Awake()
         {
 
